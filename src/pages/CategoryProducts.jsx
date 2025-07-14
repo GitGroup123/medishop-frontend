@@ -1,6 +1,6 @@
 // src/pages/CategoryProducts.jsx
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import placeholder from '../assets/placeholder.png';
 
@@ -14,7 +14,7 @@ const CategoryProducts = () => {
 
   useEffect(() => {
     axios
-      .get(`https://medishop-backend-rqfh.onrender.com/api/allproducts/${id}`)
+      .get(`http://localhost:8080/api/allproducts/${id}`)
       .then((res) => setProducts(res.data))
       .catch((err) => console.error('Error fetching products:', err))
       .finally(() => setLoading(false));
@@ -34,26 +34,26 @@ const CategoryProducts = () => {
         ) : (
           <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => (
-              <div
-                key={product._id}
-                className="bg-white rounded-xl border shadow-sm hover:shadow-xl transition duration-300 p-5 flex flex-col items-center justify-center h-full group hover:scale-105 transform"
-              >
-                <div className="w-full h-[160px] flex items-center justify-center overflow-hidden mb-4">
-                  <img
-                    src={`https://medishop-backend-rqfh.onrender.com/uploads/products/main/${product.image}`}
-                    alt={product.name}
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = placeholder;
-                    }}
-                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-200"
-                  />
+              <Link to={`/product/${product._id}`} key={product._id}>
+                <div className="bg-white rounded-xl border shadow-sm hover:shadow-xl transition duration-300 p-5 flex flex-col items-center justify-center h-full group hover:scale-105 transform">
+                  <div className="w-full h-[160px] flex items-center justify-center overflow-hidden mb-4">
+                    <img
+                      src={`http://localhost:8080/uploads/products/main/${product.image}`}
+                      alt={product.name}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = placeholder;
+                      }}
+                      className="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-200"
+                    />
+                  </div>
+
+                  <h3 className="text-lg font-semibold text-blue-800 group-hover:text-blue-600 mb-1">
+                    {product.name}
+                  </h3>
+                  <p className="text-green-700 font-bold text-md">₹{product.price}</p>
                 </div>
-                <h3 className="text-lg font-semibold text-blue-800 group-hover:text-blue-600 mb-1">
-                  {product.name}
-                </h3>
-                <p className="text-green-700 font-bold text-md">₹{product.price}</p>
-              </div>
+              </Link>
             ))}
           </div>
         )}

@@ -9,7 +9,7 @@ const Categories = () => {
 
   useEffect(() => {
     axios
-      .get('https://medishop-backend-rqfh.onrender.com/api/categories')
+      .get('http://localhost:8080/api/categories')
       .then((res) => setCategories(res.data))
       .catch((err) => console.error('Error fetching categories:', err));
   }, []);
@@ -53,7 +53,7 @@ const Categories = () => {
               >
                 <div className="bg-white rounded-xl border shadow-sm hover:shadow-xl transition duration-300 p-5 flex flex-col items-center justify-center h-full group-hover:scale-105 transform">
                   <img
-                    src={`https://medishop-backend-rqfh.onrender.com${category.image}`}
+                    src={`http://localhost:8080${category.image}`}
                     alt={category.name}
                     onError={(e) => {
                       e.target.onerror = null;
