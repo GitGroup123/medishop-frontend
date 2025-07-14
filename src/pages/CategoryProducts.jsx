@@ -14,7 +14,7 @@ const CategoryProducts = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/allproducts/${id}`)
+      .get(`https://medishop-backend-rqfh.onrender.com/api/allproducts/${id}`)
       .then((res) => setProducts(res.data))
       .catch((err) => console.error('Error fetching products:', err))
       .finally(() => setLoading(false));
@@ -38,7 +38,7 @@ const CategoryProducts = () => {
                 <div className="bg-white rounded-xl border shadow-sm hover:shadow-xl transition duration-300 p-5 flex flex-col items-center justify-center h-full group hover:scale-105 transform">
                   <div className="w-full h-[160px] flex items-center justify-center overflow-hidden mb-4">
                     <img
-                      src={`http://localhost:8080/uploads/products/main/${product.image}`}
+                      src={`https://medishop-backend-rqfh.onrender.com/uploads/products/main/${product.image}`}
                       alt={product.name}
                       onError={(e) => {
                         e.target.onerror = null;

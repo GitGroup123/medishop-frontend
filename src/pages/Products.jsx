@@ -8,7 +8,7 @@ const Products = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8080/api/products') // Replace with your actual endpoint
+      .get('https://medishop-backend-rqfh.onrender.com/api/products') // Replace with your actual endpoint
       .then((res) => setProducts(res.data))
       .catch((err) => {
         console.error('Error fetching products:', err);
@@ -45,7 +45,7 @@ const Products = () => {
               className="border rounded-xl shadow hover:shadow-lg transition p-4 bg-white flex flex-col items-center"
             >
               <img
-                src={`http://localhost:8080/uploads/products/main/${product.image}`}
+                src={`https://medishop-backend-rqfh.onrender.com/uploads/products/main/${product.image}`}
                 alt={product.name}
                 className="h-40 w-auto object-contain mb-4"
                 onError={(e) => {

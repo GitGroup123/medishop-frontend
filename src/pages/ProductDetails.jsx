@@ -12,7 +12,7 @@ const ProductDetails = () => {
   const [selectedVariant, setSelectedVariant] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/products/${id}`)
+    axios.get(`https://medishop-backend-rqfh.onrender.com/api/products/${id}`)
       .then((res) => {
         setProduct(res.data);
         if (res.data.image) {
@@ -37,14 +37,14 @@ const ProductDetails = () => {
 
   const getImagePath = () => {
     if (selectedVariant?.image) {
-      return `http://localhost:8080/uploads/products/variations/${selectedVariant.image}`;
+      return `https://medishop-backend-rqfh.onrender.com/uploads/products/variations/${selectedVariant.image}`;
     } else if (selectedImage) {
       const allImages = [product.image, ...(product.gallery || [])];
       const existsInGallery = product.gallery?.includes(selectedImage);
       const pathFolder = existsInGallery ? 'gallery' : 'main';
-      return `http://localhost:8080/uploads/products/${pathFolder}/${selectedImage}`;
+      return `https://medishop-backend-rqfh.onrender.com/uploads/products/${pathFolder}/${selectedImage}`;
     } else if (product.gallery && product.gallery.length > 0) {
-      return `http://localhost:8080/uploads/products/gallery/${product.gallery[0]}`;
+      return `https://medishop-backend-rqfh.onrender.com/uploads/products/gallery/${product.gallery[0]}`;
     } else {
       return placeholder;
     }
@@ -69,7 +69,7 @@ const ProductDetails = () => {
             {[...(product.image ? [product.image] : []), ...(product.gallery || [])].map((img, i) => (
               <img
                 key={i}
-                src={`http://localhost:8080/uploads/products/${product.gallery?.includes(img) ? 'gallery' : 'main'}/${img}`}
+                src={`https://medishop-backend-rqfh.onrender.com/uploads/products/${product.gallery?.includes(img) ? 'gallery' : 'main'}/${img}`}
                 alt="gallery"
                 onClick={() => setSelectedImage(img)}
                 onError={(e) => (e.target.src = placeholder)}
